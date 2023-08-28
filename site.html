@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Remote File Access</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            text-align: left;
+            margin-left: 10px;
+        }
+
+        label, input, button {
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        label[for="password"], .button-container button {
+            margin-top: 10px;
+        }
+
+        .password-field {
+            display: flex;
+            align-items: center;
+        }
+
+        .password-button {
+            margin-left: 10px;
+            margin-top: 5px; /* Adjust this margin as needed */
+        }
+
+        .button-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .indicator-circle {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background-color: #ccc;
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .indicator-green {
+            background-color: green;
+        }
+
+        .placeholder {
+            width: calc(100% - 50px);
+            height: calc(100vh - 50px);
+            border: 2px dashed #999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #999;
+        }
+
+        .directory-link {
+            color: blue;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function accessFiles() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            
+            // Check if username and password are correct
+            if (username === "TQSwe" && (password === "NINdulZAC9" || password === "your-4-digit-code")) {
+                // Update indicator circles
+                document.querySelector(".username-indicator").classList.add("indicator-green");
+                document.querySelector(".password-indicator").classList.add("indicator-green");
+
+                // Update the placeholder link to your actual remote directory
+                var remoteDirectoryLink = "C:";
+                var directoryLinkElement = document.querySelector(".directory-link");
+                directoryLinkElement.href = remoteDirectoryLink;
+                directoryLinkElement.style.display = "block";
+            } else {
+                alert("Invalid credentials. Access denied.");
+            }
+        }
+
+        function sendCode() {
+            // Generate a random 4-digit code
+            var code = Math.floor(1000 + Math.random() * 9000);
+
+            // Replace this with code to send the generated code to your phone
+            // For example: sendCodeToPhone(code);
+            // Here, sendCodeToPhone is a function you would implement to send the code to your phone
+            // You can use AJAX to call a server-side script to send the code
+        }
+
+        function togglePasswordVisibility() {
+            var passwordInput = document.getElementById("password");
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+            } else {
+                passwordInput.type = "password";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Remote File Access</h1>
+    <label for="username">Username:</label>
+    <input type="text" id="username" placeholder="Enter your username">
+    <span class="indicator-circle username-indicator"></span>
+    <br>
+    <label for="password">Password:</label>
+    <div class="password-field">
+        <input type="password" id="password" placeholder="Enter your password">
+        <button class="password-button" onclick="togglePasswordVisibility()">Show/Hide Password</button>
+    </div>
+    <span class="indicator-circle password-indicator"></span>
+    <div class="button-container">
+        <button onclick="sendCode()">Send SMS-Code</button>
+        <button onclick="accessFiles()">Access Files</button>
+    </div>
+    <div class="placeholder">
+        Directory Placeholder
+        <a class="directory-link" href="#" style="display: none;">Link to Remote Directory</a>
+    </div>
+</body>
+</html>
